@@ -1,0 +1,168 @@
+\documentclass[11pt,aspectratio=1610,usenames,dvipsnames]{beamer} % Beamer size: 1610, 149, 54, 43 and 32.
+\usetheme{CambridgeUS} % Ilmenau Frankfurt Dresden Warsaw Szeged Boadilla fibeamer
+\usecolortheme{beaver}
+\usepackage{minted}
+\usemintedstyle{tango}
+%\input{../nakuldesign.tex}
+\input{../minimaldesign.tex}
+\usepackage[]{algorithm2e}
+
+
+\title{Tree Ensemble Methods}
+\subtitle{Density Estimation}
+
+\author[Nakul R. Padalkar] % (optional, for multisple authors)
+{\bfseries Nakul R. Padalkar} %\and J.~Doe\inst{2}}
+
+\institute[Georgetown University] {\MakeUppercase{Georgetown University}}
+\date{\it\today}
+
+\newcommand\crule[3][black]{\textcolor{#1}{\rule{#2}{#3}}}
+
+\begin{document}
+
+
+\begin{frame}[plain]
+\maketitle
+\end{frame}
+
+\begin{frame}{Overview}
+
+\begin{multicols}{2}
+	\tableofcontents[]
+\end{multicols}
+
+\end{frame}
+
+\section{Density forests}%
+
+\begin{frame}{Unlabeled Data}%
+	\begin{itemize}
+		\item Can we use forests for unlabeled data?
+		\item To learn the density $ \mathbb{P}(v) $ that generated the data.
+		\item Similar to clustering.
+	\end{itemize}%
+\end{frame}%
+%
+\begin{frame}{Machine Learning Problems}
+	\begin{itemize}
+		\item Classic machine learning: models $ \mathbb{P}(y_{i}, x_{j}) $, where $ y_{i} $ was a single variable.
+		\begin{itemize}
+			\item Gaussian, sigmoid, etc.
+		\end{itemize}
+		\item Structured prediction: $y_{i} $ could be a vector, protein, image, dependency tree,etc.
+		\begin{itemize}
+			\item More complicated Distributions
+		\end{itemize}
+		\item Before considering $ \mathbb{P}(y_{i}, x_{j}) $ for complicated $ y_{i} $, consider modeling a simple $ \mathbb{P}(x_{i}) $, without worrying about conditioning.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Density Estimation}
+
+\begin{columns}
+	\begin{column}{0.49\textwidth}
+			\begin{itemize}
+				\item Estimate probability of feature vectors $ x_{5}= \begin{bmatrix}1 & 0 &0 &1 & 1\end{bmatrix}$.
+				\item For the training data this is easy:
+				\item Set $ \mathbb{P}(x_{i}) $ to number of times $ x_{i} $ is in the training data divided by n.
+				\item Estimate the probability of test data as well
+			\end{itemize}
+	\end{column}
+	~
+	\begin{column}{0.49\textwidth}
+		
+			\begin{align*}
+				X &= \begin{bmatrix}
+							1 & 0 & 0 & 0 \\
+							0 & 1 & 0 & 0 \\ 
+							0 & 0 & 1 & 0 \\
+							0 & 1 & 0 & 1 \\
+						\DoTikzmark{num-2}{-}	1 & 0 & 1 & 1\DoTikzmark{num1}
+						\end{bmatrix}
+				\end{align*}
+			\colrow[chordo!60!white,opacity=.5]{num-2}{num1}
+		
+	\end{column}
+	
+\end{columns}
+\end{frame}
+
+\subsection{Density estimation application}%
+\begin{frame}{Density estimation application}
+	\begin{itemize}
+		\item Density estimation could be called a "master problem" in machine learning.
+		\item If we have $ \mathbb{P}(x_{i}) $ then we can find/evaluate:
+	\begin{itemize}
+		\item \textbf{\textcolor{monkgreen}{Outliers:}}.
+		\item \textbf{\textcolor{monkgreen}{Missing data:}} filled in based on  $\mathbb{P}(x_{i}) $.
+		\item \textbf{\textcolor{monkgreen}{Vector quantization:}} can be achieved by assigning shorter code to high $ \mathbb{P}(x_{i}) $ values.
+		\item \textbf{\textcolor{monkgreen}{Association rules:}} can be computed from conditionals  $\mathbb{P}(x_{i}^{j}|x_{i}^{k}) $.
+	\end{itemize}
+		\item Joint density estimation $\mathbb{P}(x_{i}, y_{i})$
+	\begin{itemize}
+		\item Supervised learning.
+		\item Feature relevance
+	\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Density Forests}
+\begin{columns}
+	\begin{column}{0.49\textwidth}
+			\begin{itemize}
+			\item Density estimation is an unsupervised learning method.
+			\begin{itemize}
+				\item We have $ x_{i} $, but no explicit target labels.
+				\item You want to do "something" with them.
+			\end{itemize}
+			\item Some unsupervised learning tasks:
+			\begin{itemize}
+				\item Clustering: what types of $x_{i}$ are there?
+				\item Association rules: which $ x_{j} $ and $ x_{k} $ occur together?
+				\item Outlier detection: is this a normal $x_{i}$?
+				\item Latent-factors: what parts are $x_{i}$ made from?
+				\item Data visualization: what do the high-dimensional $x_{i}$ look like?
+				\item Ranking: which are the most important $x_{i}$?
+			\end{itemize}
+		\end{itemize}
+	\end{column}
+	~
+	\begin{column}{0.49\textwidth}
+		
+	\includegraphics[scale = 0.55]{figures/decisionForests-39.pdf}
+		
+	\end{column}
+	
+\end{columns}
+\end{frame}
+
+\subsection{Effect of model parameters}%
+\begin{frame}{Tree Parameters}
+		\includegraphics[scale = 1.0]{figures/decisionForests-42.pdf}
+\end{frame}
+
+\subsection{Comparison with alternative algorithms}%
+\subsection{Sampling from the generative model}%
+\subsection{Dealing with non-function relations}%
+\subsection{Quantitative analysis}%
+\section{Manifold forests}%
+\subsection{Literature on manifold learning}%
+\subsection{Specializing the forest model for manifold learning}%
+\subsection{Experiments and the effect of model parameters}%
+\section{Semi-supervised forests}%
+\subsection{Literature on semi-supervised learning}%
+\subsection{Specializing the decision forest model for semi-supervised classification}%
+\subsection{Label propagation in transduction forest}%
+\subsection{Induction from transduction}%
+\subsection{Examples, comparisons and effect of model parameters}%
+\section{Random ferns and other forest variants}%
+\subsection{Extremely randomized trees}%
+\subsection{Random ferns}%
+\subsection{Online forest training}%
+
+\subsection{Structured-output Forests}%
+
+\subsection{Further forest variants}%
+
+\end{document}
