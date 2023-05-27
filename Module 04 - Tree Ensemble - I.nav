@@ -36,8 +36,12 @@
 \headcommand {\beamer@framepages {14}{14}}
 \headcommand {\slideentry {4}{1}{6}{15/15}{Bagging}{0}}
 \headcommand {\beamer@framepages {15}{15}}
-\headcommand {\beamer@partpages {1}{15}}
-\headcommand {\beamer@subsectionpages {8}{15}}
-\headcommand {\beamer@sectionpages {8}{15}}
-\headcommand {\beamer@documentpages {15}}
-\headcommand {\gdef \inserttotalframenumber {11}}
+\headcommand {\slideentry {4}{1}{6}{15/16}{Bagging}{0}}
+\headcommand {\beamer@framepages {15}{16}}
+\headcommand {\slideentry {4}{1}{7}{17/17}{Bagging}{0}}
+\headcommand {\beamer@framepages {17}{17}}
+\headcommand {\beamer@partpages {1}{17}}
+\headcommand {\beamer@subsectionpages {8}{17}}
+\headcommand {\beamer@sectionpages {8}{17}}
+\headcommand {\beamer@documentpages {17}}
+\headcommand {\gdef \inserttotalframenumber {13}}

@@ -1,26 +1,32 @@
-\frametitle{Bagging Algorithm}
+\frametitle{Random Forest Algorithm}
+
 \begin{algorithm}[H]
-		\small
-	\SetAlgoLined
-	\SetKwInOut{Input}{Input}
-	\SetKwInOut{Output}{Output}
-	\SetKw{KwTo}{to}
-	\SetKw{KwReturn}{return}
-	\caption{Bagged Averaging}
-	\Input{Original dataset $\mathcal{D}$, Number of classifiers $T$}
-	\Output{Aggregated prediction}
-	\BlankLine
-	Initialize empty set of classifiers $\mathcal{C}$\;
-	Initialize empty set of predictions $\mathcal{P}$\;
-	\BlankLine
-	\For{$t=1$ \KwTo $T$}{
-	  Sample a bootstrap dataset $\mathcal{D}_t$ from the original dataset $\mathcal{D}$\;
-	  Train a classifier $C_t$ using $\mathcal{D}_t$\;
-	  Make predictions $\mathcal{P}_t$ using classifier $C_t$\;
-	  $\mathcal{C} \gets \mathcal{C} \cup C_t$\;
-	  $\mathcal{P} \gets \mathcal{P} \cup \mathcal{P}_t$\;
-	}
-	\BlankLine
-	Aggregate predictions in $\mathcal{P}$ using averaging or voting\;
-	\KwReturn{Aggregated prediction}\;
-	\end{algorithm}
+	\small
+\SetAlgoLined
+\SetKwInOut{Input}{Input}
+\SetKwInOut{Output}{Output}
+\SetKwFunction{RandomForest}{RandomForest}
+\SetKwFunction{RandomlySelectSamplesWithReplacement}{RandomlySelectSamplesWithReplacement}
+\SetKwFunction{DecisionTreeAlgorithm}{DecisionTreeAlgorithm}
+
+\Input{$X$: Input features (training data)}
+\Input{$y$: Output labels (training data)}
+\Input{$n\_estimators$: Number of decision trees to include in the forest}
+\Input{$max\_features$: Maximum number of features to consider for each split}
+\Output{$RandomForest$: Trained random forest model}
+
+$RandomForest \gets \emptyset$\;
+\For{$i \gets 1$ \KwTo $n\_estimators$}{
+    \textit{\# Bootstrap the training data:}\;
+    $X\_bootstrap, y\_bootstrap \gets$ \RandomlySelectSamplesWithReplacement{$X, y$}\;
+    \textit{\# Construct a decision tree:}\;
+    $tree \gets$ \DecisionTreeAlgorithm{$X\_bootstrap, y\_bootstrap, max\_features$}\;
+    \textit{\# Append the tree to the RandomForest:}\;
+    $RandomForest \gets RandomForest \cup \{tree\}$\;
+}
+
+\Return $RandomForest$\;
+\caption{Random Forest Algorithm}
+\label{alg:random_forest}
+\end{algorithm}
+

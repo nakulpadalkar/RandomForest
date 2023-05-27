@@ -157,9 +157,9 @@ Voting Classifier: Average the predictions of a collection of classifiers.
 \begin{frame}
 	\frametitle{Bagged Classifier Trees}
 
-	\includegraphics<1>[scale=0.70]{./figures/decision_tree_1.svg}
-	\includegraphics<2>[scale=0.70]{./figures/decision_tree_2.svg}
-	\includegraphics<3>[scale=0.70]{./figures/decision_tree_3.svg}
+	\includegraphics<1>[height=0.85\textheight]{./figures/decision_tree_1.pdf}
+	\includegraphics<2>[height=0.85\textheight]{./figures/decision_tree_2.pdf}
+	\includegraphics<3>[height=0.85\textheight]{./figures/decision_tree_3.pdf}
 
 \end{frame}
 \begin{frame}
@@ -169,7 +169,7 @@ Voting Classifier: Average the predictions of a collection of classifiers.
 \end{frame}
 
 
-\begin{frame}
+\begin{frame}[allowframebreaks]
 	\frametitle{Classifier Aggregation}
 
 	\begin{itemize}
@@ -181,6 +181,41 @@ Voting Classifier: Average the predictions of a collection of classifiers.
 		\item By aggregating the predictions of multiple decision trees, the bagged classifier aims to improve the overall accuracy, robustness, and generalization ability compared to using a single decision tree.
 		\item The bagged classifier can be used for both classification and regression tasks, depending on the type of base classifier (e.g., decision trees, random forests) used in the ensemble.
 		\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Random Forest Algorithm}
+
+\begin{algorithm}[H]
+	\small
+\SetAlgoLined
+\SetKwInOut{Input}{Input}
+\SetKwInOut{Output}{Output}
+\SetKwFunction{RandomForest}{RandomForest}
+\SetKwFunction{RandomlySelectSamplesWithReplacement}{RandomlySelectSamplesWithReplacement}
+\SetKwFunction{DecisionTreeAlgorithm}{DecisionTreeAlgorithm}
+
+\Input{$X$: Input features (training data)}
+\Input{$y$: Output labels (training data)}
+\Input{$n\_estimators$: Number of decision trees to include in the forest}
+\Input{$max\_features$: Maximum number of features to consider for each split}
+\Output{$RandomForest$: Trained random forest model}
+
+$RandomForest \gets \emptyset$\;
+\For{$i \gets 1$ \KwTo $n\_estimators$}{
+    \textit{\# Bootstrap the training data:}\;
+    $X\_bootstrap, y\_bootstrap \gets$ \RandomlySelectSamplesWithReplacement{$X, y$}\;
+    \textit{\# Construct a decision tree:}\;
+    $tree \gets$ \DecisionTreeAlgorithm{$X\_bootstrap, y\_bootstrap, max\_features$}\;
+    \textit{\# Append the tree to the RandomForest:}\;
+    $RandomForest \gets RandomForest \cup \{tree\}$\;
+}
+
+\Return $RandomForest$\;
+\caption{Random Forest Algorithm}
+\label{alg:random_forest}
+\end{algorithm}
 
 \end{frame}
 
