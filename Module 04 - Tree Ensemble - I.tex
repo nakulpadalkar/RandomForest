@@ -52,8 +52,137 @@
 \end{multicols}
 \end{frame}
 
+\section{Classification Problem}
+\begin{frame}{Classification Problem}
+	In general, we want our classifier to have lowest generalized error.
+	\begin{itemize}% [<alert@+>]
+		\item Data $ (X,Y) \in \mathbb{R}^{p} \times \{0,1\} $.
+		\item \textit{X} is predictor, feature; \textit{Y} is class label, response.
+		\item $ (X, Y) $ have joint probability distribution $\mathcal{D}$.
+		\item \textbf{Goal}: Based on \textit{N} training pairs $ (X_{i}, Y_{i}) $ drawn.
+		\item from $\mathcal{D}$ produce a classifier $ \hat{C}(X) \in \{0, 1\} $.
+		\item \textbf{Goal}: choose $\hat{C}$ to have low generalization error.
+	\end{itemize}
+\end{frame}
+
+\section{Strong and Weak Learners}
+\begin{frame}{Generative Methods}
+	\begin{equation*}
+		\underbrace{\mathbb{E}_{D}[(h(x|D) - y)^{2}]}_{Expected Error} = \underbrace{\mathbb{E}_{D}[(\theta-\hat{\theta})^{2}]}_{Variance} + \underbrace{\hat{\theta}^{2}}_{Bias}
+	\end{equation*}
+	\begin{itemize}% [<alert@+>]
+ 		\item Boosting - converts weak learners to strong learners. Intuitively, a weak learner is just slightly better than a random guess, while a strong learner is very close to perfect performance.	
+ 		\item \uured{Goal: } Reduce Bias.
+		\item Bagging or bootstrap aggregation averages a given procedure over many samples to reduce its variance — a poor man's Bayes.
+		\item \uured{Goal: } Reduce Variance.
+	\end{itemize}
+\end{frame}
+
+\section{Learners}
+\subsection{Weak and Strong Learners}
+\begin{frame}
+	\frametitle<1>{Weak and Strong Learners}
+	\frametitle<2-3>{Principle of Averaging}
+	\only<1>{\begin{alertblock}{Learners}
+		\begin{itemize}
+			\item A weak learner produces a classifier that is only slightly more accurate than random classification.
+			\item A class of concepts is learnable (or strongly learnable) if a polynomial-time algorithm achieves low error with high confidence for all concepts in the class.
+		\end{itemize}
+	\end{alertblock}
+	}
+~
+\only<2>{
+\begin{columns}
+	\begin{column}{0.49\textwidth}
+Voting Classifier: Average the predictions of a collection of classifiers.
+	\end{column}
+	~
+\begin{column}{0.49\textwidth}
+	\includegraphics[scale=0.40]{./figures/majority_voting.png}
+\end{column}
+\end{columns}
+}
+
+\only<3>{
+	\begin{itemize}
+		\item Instead of training different models on the same data, train the same model multiple times on different data sets and "combine" these "different" models	  
+		\item We can use some simple/weak models as the base model
+		\item \uured{How do we get multiple training data sets?} (in practice, we only have one data set at training time)
+	  \end{itemize}
+}
+
+\end{frame}
+\section{Bootstrap Aggregation}
+\subsection{Bagging}
+\begin{frame}{Bootstrap Aggregating}
+	\begin{itemize}% [<alert@+>]
+		\item Bagging or bootstrap aggregation averages a given procedure over many samples, to reduce its
+		variance — a poor man's Bayes.
+		\item Bagging classifier helps in reducing the variance of individual estimators by introducing randomization into the training stage of each of the estimators and making an ensemble out of all the estimators. Note that the high variance means that changing the training data set results in the constructed or trained estimator by a great deal.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Bagging Sequence}
+	\includegraphics[width=0.70\textwidth]{figures/Bagging.png}
+\end{frame}
+
+\begin{frame}[fragile]{Bagging Algorithm}
+	\begin{algorithm}[H]
+		\small
+	\SetAlgoLined
+	\SetKwInOut{Input}{Input}
+	\SetKwInOut{Output}{Output}
+	\SetKw{KwTo}{to}
+	\SetKw{KwReturn}{return}
+	\caption{Bagged Averaging}
+	\Input{Original dataset $\mathcal{D}$, Number of classifiers $T$}
+	\Output{Aggregated prediction}
+	\BlankLine
+	Initialize empty set of classifiers $\mathcal{C}$\;
+	Initialize empty set of predictions $\mathcal{P}$\;
+	\BlankLine
+	\For{$t=1$ \KwTo $T$}{
+	  Sample a bootstrap dataset $\mathcal{D}_t$ from the original dataset $\mathcal{D}$\;
+	  Train a classifier $C_t$ using $\mathcal{D}_t$\;
+	  Make predictions $\mathcal{P}_t$ using classifier $C_t$\;
+	  $\mathcal{C} \gets \mathcal{C} \cup C_t$\;
+	  $\mathcal{P} \gets \mathcal{P} \cup \mathcal{P}_t$\;
+	}
+	\BlankLine
+	Aggregate predictions in $\mathcal{P}$ using averaging or voting\;
+	\KwReturn{Aggregated prediction}\;
+	\end{algorithm}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Bagged Classifier Trees}
+
+	\includegraphics<1>[scale=0.70]{./figures/decision_tree_1.svg}
+	\includegraphics<2>[scale=0.70]{./figures/decision_tree_2.svg}
+	\includegraphics<3>[scale=0.70]{./figures/decision_tree_3.svg}
+
+\end{frame}
+\begin{frame}
+	\frametitle{Average Bagged Classifier}
+
+	\includegraphics[width=0.95\textwidth]{./figures/bagged_classifier_decision_regions.pdf}
+\end{frame}
 
 
+\begin{frame}
+	\frametitle{Classifier Aggregation}
+
+	\begin{itemize}
+		\item The bagged classifier is an ensemble learning method that combines multiple individual classifiers, known as decision trees, to make predictions.
+		\item Each decision tree in the ensemble is trained on a different subset of the original training dataset, created through bootstrap sampling (sampling with replacement).
+		\item During the training process, the bagged classifier fits each decision tree to a random subset of the training data, allowing each tree to learn different patterns and reduce overfitting.
+		\item When making predictions, the bagged classifier combines the predictions from all decision trees by averaging the predicted probabilities (for classification problems) or taking the majority vote (for binary classification).
+		\item The weights of the individual decision trees in the bagged classifier are calculated as $1/N$, where $N$ is the ensemble's total number of decision trees. This ensures that each decision tree contributes equally to the final prediction.
+		\item By aggregating the predictions of multiple decision trees, the bagged classifier aims to improve the overall accuracy, robustness, and generalization ability compared to using a single decision tree.
+		\item The bagged classifier can be used for both classification and regression tasks, depending on the type of base classifier (e.g., decision trees, random forests) used in the ensemble.
+		\end{itemize}
+
+\end{frame}
 
 
 \end{document}%

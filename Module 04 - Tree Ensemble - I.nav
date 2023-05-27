@@ -2,8 +2,42 @@
 \headcommand {\beamer@framepages {1}{1}}
 \headcommand {\slideentry {0}{0}{2}{2/2}{}{0}}
 \headcommand {\beamer@framepages {2}{2}}
-\headcommand {\beamer@partpages {1}{2}}
-\headcommand {\beamer@subsectionpages {1}{2}}
 \headcommand {\beamer@sectionpages {1}{2}}
-\headcommand {\beamer@documentpages {2}}
-\headcommand {\gdef \inserttotalframenumber {2}}
+\headcommand {\beamer@subsectionpages {1}{2}}
+\headcommand {\sectionentry {1}{Classification Problem}{3}{Classification Problem}{0}}
+\headcommand {\slideentry {1}{0}{1}{3/3}{}{0}}
+\headcommand {\beamer@framepages {3}{3}}
+\headcommand {\beamer@sectionpages {3}{3}}
+\headcommand {\beamer@subsectionpages {3}{3}}
+\headcommand {\sectionentry {2}{Strong and Weak Learners}{4}{Strong and Weak Learners}{0}}
+\headcommand {\slideentry {2}{0}{1}{4/4}{}{0}}
+\headcommand {\beamer@framepages {4}{4}}
+\headcommand {\beamer@sectionpages {4}{4}}
+\headcommand {\beamer@subsectionpages {4}{4}}
+\headcommand {\sectionentry {3}{Learners}{5}{Learners}{0}}
+\headcommand {\beamer@subsectionpages {5}{4}}
+\headcommand {\beamer@subsectionentry {0}{3}{1}{5}{Weak and Strong Learners}}
+\headcommand {\slideentry {3}{1}{1}{5/7}{Weak and Strong Learners}{0}}
+\headcommand {\beamer@framepages {5}{7}}
+\headcommand {\beamer@sectionpages {5}{7}}
+\headcommand {\beamer@subsectionpages {5}{7}}
+\headcommand {\sectionentry {4}{Bootstrap Aggregation}{8}{Bootstrap Aggregation}{0}}
+\headcommand {\beamer@subsectionpages {8}{7}}
+\headcommand {\beamer@subsectionentry {0}{4}{1}{8}{Bagging}}
+\headcommand {\slideentry {4}{1}{1}{8/8}{Bagging}{0}}
+\headcommand {\beamer@framepages {8}{8}}
+\headcommand {\slideentry {4}{1}{2}{9/9}{Bagging}{0}}
+\headcommand {\beamer@framepages {9}{9}}
+\headcommand {\slideentry {4}{1}{3}{10/10}{Bagging}{0}}
+\headcommand {\beamer@framepages {10}{10}}
+\headcommand {\slideentry {4}{1}{4}{11/13}{Bagging}{0}}
+\headcommand {\beamer@framepages {11}{13}}
+\headcommand {\slideentry {4}{1}{5}{14/14}{Bagging}{0}}
+\headcommand {\beamer@framepages {14}{14}}
+\headcommand {\slideentry {4}{1}{6}{15/15}{Bagging}{0}}
+\headcommand {\beamer@framepages {15}{15}}
+\headcommand {\beamer@partpages {1}{15}}
+\headcommand {\beamer@subsectionpages {8}{15}}
+\headcommand {\beamer@sectionpages {8}{15}}
+\headcommand {\beamer@documentpages {15}}
+\headcommand {\gdef \inserttotalframenumber {11}}

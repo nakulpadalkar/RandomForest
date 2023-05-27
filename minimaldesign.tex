@@ -1,10 +1,11 @@
+\pdfsuppresswarningpagegroup=1
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
-\usepackage{libertine}
-\usepackage[libertine]{newtxmath}
+%\usepackage{libertine}
+%\usepackage[libertine]{newtxmath}
 \usepackage{tikz}
 \usepackage{pgf,pgfplots}
-\usepackage{tabularx,tabulary,booktabs,multicol,multirow}
+\usepackage{tabularx,tabulary,booktabs,multicol,multirow,dcolumn}
 \usepackage[framemethod=TikZ]{mdframed}
 \usepackage{amsmath,amsthm,amssymb,amsfonts,mathtools}
 \usepackage{courier,textgreek}
@@ -19,20 +20,42 @@
 \usepackage{pdfrender}
 \usepackage{hhline}
 \usepackage{textpos}
-\usepackage{tikz,pgf}
+\usepackage{bm}
 \usepackage[overload]{textcase}
 \usepackage{setspace}
-\usepackage[ruled]{algorithm2e}
-\usepackage{algorithmicx}
-%\usepackage{algpseudocode}
+\usepackage[ruled,vlined]{algorithm2e}
+% \usepackage{algorithm}
+% \usepackage{algpseudocode}
+% \usepackage{algorithmicx}
+\usepackage{algpseudocode}
 \usepackage{adjustbox}
+\RequirePackage{etoolbox}
+\RequirePackage{datetime}
+\RequirePackage{keyval}
+\RequirePackage{calc}
+\usepackage{tkz-graph}
+\allowdisplaybreaks
+% Latin Modern
+\usepackage{lmodern}
+% Verdana font type
+%\usepackage{verdana}
+% Helvetica
+%\usepackage{helvet}
+% Times (text and math)
+%\usepackage{newtx, newtxmath}
+% Nice font combination
+%\usepackage{mathptmx} % math
+%\usepackage{sourcesanspro} % sans-serif
+\usepackage{charter} % serif
 
-\usetikzlibrary{arrows.meta,
-	bending,
-	intersections,
-	quotes,
-	shapes.geometric}
 
+\newcommand {\argmax}[2]{\mbox{\raisebox{-1.7ex}{$\stackrel{\textstyle{\rm #1}}{\scriptstyle #2}$}}\,}  % to replace with the amsmath construction
+\newcommand{\myexe}[1]{{\small \uured{Exercise} {#1}}}
+% Enlarge slide size
+%\makeatletter
+%\beamer@paperwidth 1.09375\beamer@paperwidth%
+%\beamer@paperheight 1.09375\beamer@paperheight%
+%\makeatother
 \usetikzlibrary{shapes,arrows,shapes.geometric,backgrounds,calc,decorations.text,calc,matrix,decorations.markings,decorations.pathreplacing,mindmap,shadows,through,positioning}
 %\renewcommand<>{\item}[1]{\only#2{\beameroriginal{\item}{#1}}}
 
@@ -67,17 +90,59 @@
 \MakeOuterQuote{"}
 
 
+\setbeamercolor*{block title example}{fg=red!50!black,bg= green!80!black!50}
+\setbeamercolor*{block body example}{fg=green!20!black, bg= green!15}
+\setbeamercolor*{block body alerted}{fg= orange!50!black, bg= orange!15}
+\setbeamercolor*{block title alerted}{fg=yellow!50, bg= orange!50!red}
+\usepackage[skins]{tcolorbox}
+
+%\AtBeginSection{\frame{\sectionpage}}
+
+%\setbeamertemplate{section page}
+%{
+%	\begin{center}
+%		\begin{beamercolorbox}[sep=12pt,center]{part title}
+%			\usebeamerfont{section title}\insertsection\par
+%		\end{beamercolorbox}
+%	\end{center}
+%}
+
+
+%\setbeamertemplate{section page}{%
+%\pgfdeclarelayer{background}
+%\pgfdeclarelayer{foreground}
+%\pgfsetlayers{background,main,foreground}
+%\begin{tikzpicture}[remember picture,overlay]
+%	\begin{pgfonlayer}{background}
+%		\node[anchor=north,opacity=.90] at ([yshift=0.10cm,xshift=-0.20cm]current page.north) {\includegraphics[scale=0.95]{../section01.pdf}};
+%	\end{pgfonlayer}
+%	\node[anchor=west]
+%	at ([yshift=-20pt,xshift=10pt]current page.west) (section)
+%	{\parbox[t]{\textwidth}{\raggedright%
+%			\usebeamerfont{title}\textcolor{midnight}{%
+%				\textpdfrender{
+%					%						TextRenderingMode=FillStroke,
+%					%						FtillColor=white,
+%					%						LineWidth=.1ex,
+%				}{\insertsection}}}};
+%\end{tikzpicture}
+%}
+
+
+
 \usefonttheme{serif}
 
 \setbeamersize{text margin left=15pt,text margin right=15pt}
 \definecolor{bayoux}{HTML}{496480}
-
+%\setbeamercolor{normal text}{fg=uured}
+%\setbeamerfont{normal text}{size=\large\selectfont,series=\bfseries\selectfont}
 
 \setbeamerfont{author}{size=\Large}
 \setbeamerfont{institute}{size=\fontsize{9}{10}}
 \setbeamerfont{title}{size=\LARGE\bfseries}
 \setbeamerfont{subtitle}{size=\large\normalfont\bfseries\slshape\selectfont}
-
+\setbeamerfont{section title}{size=\fontsize{9}{10}}
+\setbeamercolor{section title}{fg=monkgreen!30}
 
 \setbeamertemplate{title page}{%
 	\pgfdeclarelayer{background}
@@ -85,94 +150,50 @@
 	\pgfsetlayers{background,main,foreground}
 	\begin{tikzpicture}[remember picture,overlay,node distance=.1cm]
 		\begin{pgfonlayer}{background}
-		\node[anchor=north,opacity=1.0] at ([yshift=0.05cm,xshift=-5.0cm]current page.north east) {\includegraphics[scale=.73]{start03.pdf}};
-		\draw[fill=white!95!black,opacity=0.45,draw=white!90!black] (-0.6,-6.5) rectangle ++ (0.65\paperwidth,1.05\paperheight);
+		\node[anchor=north,opacity=0.80] at ([yshift=-1.50cm,xshift=-7.0cm]current page.north east) {\includegraphics[scale=0.85]{symbols.pdf}};
+%		\draw[fill=white!95!black,opacity=0.45,draw=white!90!black] (-0.6,-6.5) rectangle ++ (0.65\paperwidth,1.05\paperheight);
 		\end{pgfonlayer}
 	
 		\node [anchor=north] 
-			at ([yshift=-80pt,xshift=125pt]current page.north west) (author)
-			{\parbox[t]{0.5\paperwidth}{\centering%
+			at ([yshift=-60pt,xshift=5.55cm]current page.north west) (author)
+			{\parbox[t]{0.5\paperwidth}{\raggedright%
 					\usebeamerfont{author}\textcolor{matisse}{%
 				\textpdfrender{
 					%						TextRenderingMode=FillStroke,
 					%    FillColor=orange,
 					%    LineWidth=.1ex,
 				}{\insertauthor}}}};
-		\node (institute) [anchor=north, below of = author,node distance = 0.45cm] 
+		\node (institute) [anchor=north, below of = author,node distance = 0.55cm] 
 %		at ([yshift=-95pt, xshift=125pt]current page.north west) (institute)
-		{\parbox[t]{.50\paperwidth}{\centering%
+		{\parbox[t]{.50\paperwidth}{\raggedright%
 				{\usebeamerfont{institute}\textcolor{gray}{\insertinstitute}}}};
-	   \draw[draw=matisse] (0,-0.05)  -- (0.5\paperwidth,-0.05) node[right] {};
+	   \draw[draw=matisse] (1,0.5)  -- (0.5\paperwidth,0.5) node[right] {};
 
-		\node (title) [anchor=north,below of = institute,node distance =1.75cm]
+		\node (title) [anchor=north,below of = institute,node distance =1.5cm]
 %		at ([yshift=-120pt,xshift=125pt]current page.north west) (title)
-		{\parbox[t]{0.50\paperwidth}{\centering%
+		{\parbox[t]{0.50\paperwidth}{\raggedright%
 				\usebeamerfont{title}\textcolor{black!70!white}{%
 					\textpdfrender{
 %						TextRenderingMode=FillStroke,
 %						FtillColor=white,
 %						LineWidth=.1ex,
 					}{\inserttitle}}}};
-		\node (subtitle) [anchor=north, below of = title, node distance = 1.50cm]
+		\node (subtitle) [anchor=north, below of = title, node distance = 0.750cm]
 %		at ([yshift=-60pt,xshift=-20pt]current page.east) (subtitle)
-		{\parbox[t]{.5\paperwidth}{\centering
+		{\parbox[t]{.5\paperwidth}{\raggedright
 				\usebeamerfont{subtitle}\textcolor{chordo}{\insertsubtitle}}};
-
-
 %		\node[anchor=north east] 
 %		at ([yshift=-70pt]current page.north east) (institute)
 %		{\parbox[t]{.78\paperwidth}{\raggedleft%
 %				\usebeamerfont{institute}\textcolor{gray}{\insertinstitute}}};
 %		\node[anchor=south west] 
-%		at ([yshift=20pt]current page.west) (logo)
+%		at ([ysohift=20pt]current page.west) (logo)
 %		{\parbox[t]{.19\paperwidth}{\raggedleft%
 %				\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic}};
 	\end{tikzpicture}
 }
 %\titlegraphic{\includegraphics[width=2cm]{}}
 
-
-
-
-
-%\setbeamertemplate{title page}{%
-%	\begin{tikzpicture}[remember picture,overlay]
-%	\node[anchor=south,opacity=0.650] at ([yshift=-0.20cm, xshift=-0.0cm]current page.south){\includegraphics[scale=0.50]{figures/HealyClockTower.jpg}};
-%	\node[draw=midnight,rectangle,fill=midnight!90white,anchor=east]
-%	at ([yshift=-40, xshift=0.00pt]current page.north east) (titleback)
-%	{};
-%	\node[anchor=east]
-%	at ([yshift=-40, xshift=0.00pt]current page.north east) (title)
-%	{\parbox[t]{0.55\paperwidth}{\centering%
-%			\usebeamerfont{title}\textcolor{white}{%
-%				\textpdfrender{
-%%					TextRenderingMode=FillStroke,
-%					%					FillColor=red,
-%					%					LineWidth=.1ex,
-%				}{\inserttitle}}}};
-%	\node[anchor=east]
-%	at ([yshift=-95pt,xshift=-40pt]current page.north east) (subtitle)
-%	{\parbox[t]{0.35\paperwidth}{\centering\usebeamerfont{subtitle}\textcolor{matisse}{\insertsubtitle}}};
-%	\node[anchor=west] 
-%	at ([yshift=-05pt, xshift=15pt]current page.west) (author)
-%	{\parbox[t]{.6\paperwidth}{\raggedright%
-%			\usebeamerfont{author}\textcolor{turmeric}{%
-%				\textpdfrender{
-%%					TextRenderingMode=FillStroke,
-%					%    FillColor=orange,
-%					%    LineWidth=.1ex,
-%				}{\insertauthor}}}};
-%	\node[anchor=west] 
-%	at ([yshift=-175pt, xshift=15pt]current page.north west) (institute)
-%	{\parbox[t]{.78\paperwidth}{\raggedright%
-%			\usebeamerfont{institute}\textcolor{lightning}{\insertinstitute}}};
-%	%	\node[anchor=south west] 
-%	%	at ([yshift=-50pt]current page.north west) (logo)
-%	%	{\parbox[t]{.19\paperwidth}{\raggedright%
-%	%			\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic}};
-%	\end{tikzpicture}
-%}
-%%\titlegraphic{\includegraphics[width=2cm]{example-image}}
 \setbeamercolor{block title alerted}{fg=white,bg=midnight}%body
 \setbeamercolor{block body alerted}{fg=black!90,bg=midnight!05!white}% parent of all alerts default is red
 \setbeamercolor{alerted text}{fg=white}
@@ -181,10 +202,10 @@
 \setbeamerfont{alerted text}{series=\bfseries}
 
 \setbeamertemplate{item projected}{\color{midnight!80!white}}
-\setbeamertemplate{itemize item}{\color{slate}\rule[0.5ex]{5pt}{5pt}}
+\setbeamertemplate{itemize item}{\color{black!70}\rule[0.5ex]{5pt}{5pt}}
 \setbeamertemplate{itemize subitem}{\color{midnight}$\blacktriangleright$}
 \setbeamertemplate{itemize subsubitem}{\color{chordo}$\blacktriangleright$}
-\setbeamertemplate{enumerate item}{\color{black!75!white}\bfseries\insertenumlabel.}
+\setbeamertemplate{enumerate item}{\color{black!70}\bfseries\insertenumlabel.}
 \setbeamertemplate{enumerate subitem}{\color{midnight}\it\bfseries\insertenumlabel.\insertsubenumlabel}
 \setbeamertemplate{enumerate subsubitem}{\color{chordo}\it\bfseries\insertenumlabel.\insertsubenumlabel.\insertsubsubenumlabel}
 
@@ -193,7 +214,7 @@
 \setbeamerfont{itemize/enumerate subbody}{series=\normalfont\itshape}
 \setbeamerfont{itemize/enumerate subsubbody}{series=\normalfont}
 
-\setbeamercolor{itemize/enumerate body}{fg=slate}
+\setbeamercolor{itemize/enumerate body}{fg=black!70}
 \setbeamercolor{itemize/enumerate subbody}{fg=midnight} % {fg=midnight!80!white}
 \setbeamercolor{itemize/enumerate subsubbody}{fg=chordo} % {fg=midnight!80!white}
 
@@ -234,16 +255,17 @@
 \definecolor{uulgr}{rgb}{0.7,0.7,0.7}
 \definecolor{uullgr}{rgb}{0.9,0.9,0.9}
 \newcommand{\uured}[1]{{\bfseries\color{uured}#1}}
-\newcommand{\tanoi}[1]{{\bfseries\color{tanoi}#1}}
+\newcommand{\tainoi}[1]{{\bfseries\color{tainoi}#1}}
 \newcommand{\matisse}[1]{{\bfseries\color{matisse}#1}}
 \newcommand{\lightning}[1]{{\bfseries\color{lightning}#1}}
-\newcommand{\midnight}[1]{{\bfseries\color{midningt}#1}}
+\newcommand{\monkgreen}[1]{{\bfseries\color{monkgreen}#1}}
+%\newcommand{\midnight}[1]{{\bfseries\color{midninght}#1}}
 
 
 \setbeamerfont{frametitle}{series=\bfseries}
-\setbeamercolor{frametitle}{fg=midnight,bg=dovegray!45}
+\setbeamercolor{frametitle}{fg=midnight}
 %\setbeamercolor{frametitle}{fg=lightning,bg=matisse}
-%\setbeamercolor{frametitle}{fg=lightning,bg=matisse}
+
 
 \setbeamercolor*{separation line}{}
 \setbeamercolor*{fine separation line}{}
@@ -292,28 +314,53 @@
 %}%
 \makeatother
 
+
+\newcommand{\dimTitleOffset}{0.148\paperheight}
+\newcommand{\dimSubtitleOffset}{0.0175\paperheight}
+\newcommand{\dimFrameTitleOffset}{0.033\paperheight}
+\newcommand{\dimAuthorOffset}{0.06\paperheight}
+\newcommand{\dimInstituteOffset}{0.027\paperheight}
+
 \makeatletter
-\setbeamertemplate{frametitle}{%
-	\nointerlineskip%
-%	\vskip0.3cm%
-	\begin{beamercolorbox}[wd=\paperwidth,leftskip=0.0cm,rightskip=.25cm plus1fil,vmode,ht=3.5ex]{frametitle}%
-		\begin{minipage}{0.5cm}%
-			\vspace*{-4pt}\tikz{\draw[fill=midnight,draw=midnight] (-0.50,4.8) rectangle ++ (0.20,1.1);}
-		\end{minipage}%
-		\begin{minipage}{\dimexpr\paperwidth-3.0cm\relax}%
-			\usebeamerfont*{frametitle}\insertframetitle%
-			\ifx\insertframesubtitle\@empty%
-			\strut\par%
-			\else
-			\par{\usebeamerfont*{framesubtitle}{\usebeamercolor[fg]{framesubtitle}\insertframesubtitle}\strut\par}%
-			\fi%%
-		\end{minipage}%
-	\end{beamercolorbox}%
-	\vspace*{-6.15pt}
-	\begin{beamercolorbox}[wd=\paperwidth,ht=1pt,dp=1pt]{}%
-		\progressbar@progressbar%
-	\end{beamercolorbox}%
+% Position the frame title so that it would get into the headline
+\setbeamertemplate{frametitle}
+{
+	\vspace*{0.0125\paperheight}
+	{\usebeamerfont{section title}\color{monkgreen!30}\insertsection} \vspace*{9pt}
+
+%	{
+%		\vspace{\dimFrameTitleOffset}
+%	}
+	\vspace{-1pt}\usebeamerfont{frametitle}%
+%	\ifdefstring{\bDTUWhiteFrame}{true}{\color{white}}{\color{black}}%
+	\insertframetitle
+	\vspace*{4pt}
 }
+
+\makeatother
+
+%\makeatletter
+%\setbeamertemplate{frametitle}{%
+%	\nointerlineskip%
+%%	\vskip0.3cm%
+%	\begin{beamercolorbox}[wd=\paperwidth,leftskip=0.0cm,rightskip=.25cm plus1fil,vmode,ht=3.5ex]{frametitle}%
+%		\begin{minipage}{0.5cm}%
+%			\vspace*{-4pt}\tikz{\draw[fill=midnight,draw=midnight] (-0.50,4.8) rectangle ++ (0.20,1.1);}
+%		\end{minipage}%
+%		\begin{minipage}{\dimexpr\paperwidth-3.0cm\relax}%
+%			\usebeamerfont*{frametitle}\insertframetitle%
+%			\ifx\insertframesubtitle\@empty%
+%			\strut\par%
+%			\else
+%			\par{\usebeamerfont*{framesubtitle}{\usebeamercolor[fg]{framesubtitle}\insertframesubtitle}\strut\par}%
+%			\fi%%
+%		\end{minipage}%
+%	\end{beamercolorbox}%
+%	\vspace*{-6.15pt}
+%	\begin{beamercolorbox}[wd=\paperwidth,ht=1pt,dp=1pt]{}%
+%		\progressbar@progressbar%
+%	\end{beamercolorbox}%
+%}
 
 %\addtobeamertemplate{footline}{%
 %	\setlength\unitlength{1ex}%
@@ -365,7 +412,7 @@
 %}
 %\makeatother
 
-\makeatletter
+%\makeatletter
 
 \defbeamertemplate{footline}{myframe number}
 {

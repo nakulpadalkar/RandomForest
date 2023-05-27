@@ -1,0 +1,18 @@
+\begin{algorithm}[H]
+			\caption{Bagged Averaging}
+			\begin{algorithmic}[1]
+				\Procedure{BaggedAveraging}{}
+				\State Initialize empty set of classifiers $\mathcal{C}$
+				\State Initialize empty set of predictions $\mathcal{P}$
+				\For{$t=1$ to $T$}
+				\State Sample a bootstrap dataset $\mathcal{D}_t$ from the original dataset $\mathcal{D}$
+				\State Train a classifier $C_t$ using $\mathcal{D}_t$
+				\State Make predictions $\mathcal{P}_t$ using classifier $C_t$
+				\State $\mathcal{C} \gets \mathcal{C} \cup C_t$
+				\State $\mathcal{P} \gets \mathcal{P} \cup \mathcal{P}_t$
+				\EndFor
+				\State Aggregate predictions in $\mathcal{P}$ using averaging or voting
+				\State \textbf{return} Aggregated prediction
+				\EndProcedure
+			\end{algorithmic}
+		\end{algorithm}
