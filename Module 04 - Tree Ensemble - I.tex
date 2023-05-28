@@ -184,6 +184,8 @@ Voting Classifier: Average the predictions of a collection of classifiers.
 
 \end{frame}
 
+\section{Random Forests}
+\subsection{Random Forests Algorithm}
 \begin{frame}[fragile]
 \frametitle{Random Forest Algorithm}
 
@@ -219,5 +221,37 @@ $RandomForest \gets \emptyset$\;
 
 \end{frame}
 
+\subsection{Scikit-Learn Python vs. R}
+\begin{frame}[allowframebreaks]
+	\frametitle{Scikit-Learn Python vs. R}
+	\begin{itemize}
+		\item \texttt{n\_estimators}: The number of trees in the random forest.
+		\item \texttt{max\_depth}: The maximum depth of each decision tree in the ensemble.
+		\item \texttt{min\_samples\_split}: The minimum number of samples required to split an internal node.
+		\item \texttt{min\_samples\_leaf}: The minimum number of samples required to be at a leaf node.
+		\item \texttt{max\_features}: The number of features to consider when looking for the best split.
+		\item \texttt{bootstrap}: Whether bootstrap samples should be used when building trees.
+		\item \texttt{random\_state}: The seed used by the random number generator.
+		\end{itemize}
+	\framebreak
+	\begin{itemize}
+		\item \texttt{ntree}: The number of trees in the random forest.
+		\item \texttt{mtry}: The number of variables randomly sampled as candidates at each split.
+		\item \texttt{maxdepth}: The maximum depth of each tree in the ensemble.
+		\item \texttt{nodesize}: The minimum number of samples required for a node to be split further.
+		\item \texttt{sampsize}: The number of samples randomly drawn for each tree.
+		\item \texttt{importance}: Whether to compute variable importance measures.
+		\end{itemize}
+\end{frame}
+
+\subsection{Tuning Random Forests}
+\begin{frame}
+	\frametitle<1>{Effect of Number of Trees}
+	\frametitle<2>{Effect of Tree Depth}
+
+	\includegraphics<1>[scale=0.50]{./figures/random_forest_accuracy.pdf}
+	\includegraphics<2>[scale=0.60]{./figures/random_forest_depth_accuracy.pdf}
+
+\end{frame}
 
 \end{document}%
