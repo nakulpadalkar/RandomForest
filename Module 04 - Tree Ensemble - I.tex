@@ -155,6 +155,12 @@ Voting Classifier: Average the predictions of a collection of classifiers.
 \end{frame}
 
 \begin{frame}
+	\frametitle{Average Bagged Classifier}
+
+	\includegraphics[width=0.95\textwidth]{./figures/bagged_classifier_decision_regions.pdf}
+\end{frame}
+
+\begin{frame}
 	\frametitle{Bagged Classifier Trees}
 
 	\includegraphics<1>[height=0.85\textheight]{./figures/decision_tree_1.pdf}
@@ -162,11 +168,7 @@ Voting Classifier: Average the predictions of a collection of classifiers.
 	\includegraphics<3>[height=0.85\textheight]{./figures/decision_tree_3.pdf}
 
 \end{frame}
-\begin{frame}
-	\frametitle{Average Bagged Classifier}
 
-	\includegraphics[width=0.95\textwidth]{./figures/bagged_classifier_decision_regions.pdf}
-\end{frame}
 
 
 \begin{frame}[allowframebreaks]
@@ -185,6 +187,20 @@ Voting Classifier: Average the predictions of a collection of classifiers.
 \end{frame}
 
 \section{Random Forests}
+\subsection{Random Forests}
+
+\begin{frame}
+	\frametitle{Building Random Forests}
+		\begin{itemize}
+			\item Randomly select $k$ features from the total $m$ features.
+			\item Among the $k$ features, calculate the node $d$ using the best split point.
+			\item Split the node into daughter nodes using the best split.
+			\item Repeat steps 1 to 3 until the number of nodes $n$ in the tree exceeds a specified minimum.
+			\item Build forest by repeating steps 1 to 4 for $N$ times to create $N$ number of trees.
+			\item For a new data point, make each tree in the forest predict the class to which the data points belong. The forest chooses the class that gets the most votes.
+		\end{itemize}
+\end{frame}
+
 \subsection{Random Forests Algorithm}
 \begin{frame}[fragile]
 \frametitle{Random Forest Algorithm}
@@ -251,6 +267,34 @@ $RandomForest \gets \emptyset$\;
 
 	\includegraphics<1>[scale=0.50]{./figures/random_forest_accuracy.pdf}
 	\includegraphics<2>[scale=0.60]{./figures/random_forest_depth_accuracy.pdf}
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Advanced Uses of Random Forests}
+	\begin{itemize}
+		\item \uured{Feature Importance}: Random Forests can be used to compute feature importance scores that indicate the relative importance of each feature in the dataset.
+		\item \uured{Outlier Detection}: Random Forests can be used to identify outliers in a dataset.
+		\item \uured{Missing Value Imputation}: Random Forests can be used to impute missing values in a dataset.
+		\item \uured{Anomaly Detection}: Random Forests can be used to identify anomalies in a dataset.
+		\item \uured{Semi-Supervised Learning}: Random Forests can be used for semi-supervised learning, where only a subset of the training data has labels.
+		\item \uured{Unsupervised Learning}: Random Forests can be used for unsupervised learning, where the goal is to discover patterns and structures in a dataset.
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}[allowframebreaks]
+	\frametitle{Benefits}
+	\begin{itemize}
+		\item \uured{Reduced Overfitting}: Random Forest reduces the risk of overfitting by diversifying the trees in the ensemble.
+		\item \uured{Highly Accurate}: Random Forest provides high predictive accuracy by averaging the predictions of multiple trees.
+		\item \uured{Handles High-Dimensional Data}: Random Forest performs well with high-dimensional data, handling large feature spaces effectively.
+		\item \uured{Implicit Feature Selection}: Random Forest performs feature selection by evaluating feature importance during training.
+		\item \uured{Resistant to Overfitting}: Random Forest resists overfitting due to random subsampling and the ensemble averaging effect.
+		\item \uured{Efficient Parallelization}: Random Forest training can be parallelized for improved performance.
+		\item \uured{Outliers and Missing Data Handling}: Random Forest is relatively robust to outliers and can handle missing data.
+		\end{itemize}
+	
 
 \end{frame}
 
