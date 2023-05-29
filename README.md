@@ -43,20 +43,20 @@ pip install scikit-learn pandas numpy
 
 5. Join the Live Share session using the provided Live Share link.
 
-6. Follow the instructor's guidance throughout the demonstration to learn about random forest and participate actively.
+6. Follow the instructor's guidance throughout the demonstration to learn about random forests and participate actively.
 
 ## Resources
 
-- `examples/`: Contains code examples and Jupyter notebooks used during the teaching demonstration.
-- `data/`: Contains sample datasets for hands-on exercises.
-- `references/`: Includes reference materials and links related to random forest.
+- `code/`: Contains code examples and Jupyter notebooks used during the teaching demonstration.
+- `data/`: Contains sample datasets for hands-on exercises. In this case, we will use Breast Cancer Wisconsin (Diagnostic) Data Set from UCI Machine Learning Repository.
+- `references/`: Includes reference materials and links related to the random forest. Most of the presentation is built on Microsoft Technical Report.
 
 ## Contact
 
 If you have any questions or need further assistance, feel free to reach out to the instructor:
 
-- Instructor Name: [Your Name]
-- Email: [Your Email Address]
+- Instructor Name: Nakul R. Padalkar
+- Email: nakul.padalkar@georgetown.edu
 
 We hope you find this teaching demonstration informative and engaging! Happy learning!
 
